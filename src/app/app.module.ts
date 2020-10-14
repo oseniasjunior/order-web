@@ -7,12 +7,14 @@ import {MeansPaymentComponent} from './means-payment/means-payment.component';
 import {MeansPaymentItemComponent} from "./means-payment/means-payment-item/means-payment-item.component";
 import {HttpClientModule} from '@angular/common/http';
 import {BaseService} from "./services/base-service";
+import {ProductComponent} from './product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MeansPaymentComponent,
-    MeansPaymentItemComponent
+    MeansPaymentItemComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
