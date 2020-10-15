@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   }
 
   public getAll(): void {
-    this.service.getAll("product")
+    this.service.getAll("product/")
       .subscribe(response => this.items = response);
   }
 

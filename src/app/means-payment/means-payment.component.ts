@@ -20,7 +20,7 @@ export class MeansPaymentComponent implements OnInit {
   }
 
   public getAll(): void {
-    this.service.getAll("means_payment")
+    this.service.getAll("means_payment/")
       .subscribe(response => this.items = response);
   }
 

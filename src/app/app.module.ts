@@ -17,6 +17,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTableModule} from "@angular/material/table";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MatTableModule} from "@angular/material/table";
     MatButtonModule,
     MatToolbarModule,
     MatTableModule,
+    FormsModule,
   ],
 
   providers: [

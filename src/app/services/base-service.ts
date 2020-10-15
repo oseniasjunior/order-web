@@ -5,8 +5,10 @@ import {catchError, tap} from "rxjs/operators";
 
 @Injectable()
 export class BaseService<T> {
-  public fullUrl = "http://127.0.0.1:8000/api/";
+  public baseUrl = "http://127.0.0.1:8000/api/";
+  public endpoint = "";
   private parameters: HttpParams = new HttpParams();
+
 
   constructor(public http: HttpClient) {
   }
@@ -31,17 +33,19 @@ export class BaseService<T> {
     }
   }
 
-  public save(entity: T): Observable<T> {
+  public save(entity: T, path: string): Observable<T> {
     this.clearParameter();
-    return this.http.post<T>(this.fullUrl, entity, this.getOptions())
+    const fullUrl = `${this.baseUrl}${path}`;
+    return this.http.post<T>(`${fullUrl}`, entity, this.getOptions())
       .pipe(
         tap(response => response as HttpUserEvent<T>),
         catchError(ex => from([]))
       );
   }
 
-  public getById(id: number | string, route?: string): Observable<T> {
-    const url = route ? `${this.fullUrl}${id}/${route}/` : `${this.fullUrl}${id}/`;
+  public getById(id: number | string, path: string, route?: string): Observable<T> {
+    const fullUrl = `${this.baseUrl}${path}`;
+    const url = route ? `${fullUrl}${id}/${route}/` : `${fullUrl}${id}/`;
     return this.http.get<T>(url, this.getOptions())
       .pipe(
         tap(response => response as HttpUserEvent<T>),
@@ -49,9 +53,10 @@ export class BaseService<T> {
       );
   }
 
-  public delete(id: number | string): Observable<any> {
+  public delete(id: number | string, path: string): Observable<any> {
     this.clearParameter();
-    const url = `${this.fullUrl}${id}/`;
+    const fullUrl = `${this.baseUrl}${path}`;
+    const url = `${fullUrl}${id}/`;
     return this.http.delete<any>(url, this.getOptions())
       .pipe(
         tap(response => response as HttpUserEvent<any>),
@@ -59,9 +64,10 @@ export class BaseService<T> {
       );
   }
 
-  public update(id: number | string, entity: any): Observable<any> {
+  public update(id: number | string, entity: any, path: string): Observable<any> {
     this.clearParameter();
-    const url = `${this.fullUrl}${id}/`;
+    const fullUrl = `${this.baseUrl}${path}`;
+    const url = `${fullUrl}${id}/`;
     return this.http.patch<T>(url, entity, this.getOptions())
       .pipe(
         tap(response => response as HttpUserEvent<T>),
@@ -69,8 +75,9 @@ export class BaseService<T> {
       );
   }
 
-  public getAll(route?: string): Observable<T[]> {
-    const url = route ? `${this.fullUrl}${route}/` : `${this.fullUrl}`;
+  public getAll(path: string, route?: string): Observable<T[]> {
+    const fullUrl = `${this.baseUrl}${path}`;
+    const url = route ? `${fullUrl}${route}/` : `${fullUrl}`;
     return this.http.get<T[]>(url, this.getOptions())
       .pipe(
         tap(response => response as HttpUserEvent<T[]>),
