@@ -9,6 +9,7 @@ import {Product} from "../models/product";
 })
 export class ProductComponent implements OnInit {
 
+  public displayedColumns: string[] = ["id", "name", "sale_price"];
   public items: Product[] = [];
 
   constructor(public service: BaseService<Product>) {
