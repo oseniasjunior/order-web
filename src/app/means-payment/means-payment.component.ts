@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {MeansPayment} from "../models/means-payment";
 import {BaseService} from "../services/base-service";
 
 @Component({
-  selector: 'app-means-payment',
-  templateUrl: './means-payment.component.html',
-  styleUrls: ['./means-payment.component.css']
+  selector: "app-means-payment",
+  templateUrl: "./means-payment.component.html",
+  styleUrls: ["./means-payment.component.css"]
 })
 export class MeansPaymentComponent implements OnInit {
 
+  public displayedColumns: string[] = ["id", "description"];
   public items: MeansPayment[] = [];
 
   constructor(public service: BaseService<MeansPayment>) {

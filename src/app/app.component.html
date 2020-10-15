@@ -1,5 +1,19 @@
-<div>
-  <p><a class="button" [routerLink]="['/means_payment']">Meios de pagamento</a></p>
-  <p><a class="button" [routerLink]="['/product']">Produto</a></p>
-  <router-outlet></router-outlet>
+<div fxLayout="column">
+  <div>
+    <mat-toolbar color="primary">
+      <span>Sistema de pedidos</span>
+    </mat-toolbar>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menu">Cadastros básicos</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/means_payment']">Meios de pagamento</button>
+      <button mat-menu-item [routerLink]="['/product']">Produtos</button>
+    </mat-menu>
+  </div>
+
+  <div fxFlex class="main">
+    <router-outlet></router-outlet>
+  </div>
 </div>
